@@ -4,8 +4,10 @@ import Bird from "./components/Bird"
 
 const App = () => {
     return (
-        <div style={{height: "100vh", width: "100vw", display: "flex", alignItems: "center", justifyContent: "center"}}>
-            <Bird/>
+        <div className="app">
+            <div className="game-container">
+                <Bird/>
+            </div>
         </div>
     )
 }

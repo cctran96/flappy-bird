@@ -18,7 +18,7 @@ const Bird = () => {
     }, [handleSpriteChange])
 
     return (
-        <div style={style}>
+        <div className="bird">
             <img 
             src={require("../bird spritesheet.png").default} 
             alt="flappy bird"
@@ -31,9 +31,3 @@ const Bird = () => {
 }
 
 export default Bird
-
-const style = {
-    height: "162px",
-    width: "236px",
-    overflow: "hidden"
-}
