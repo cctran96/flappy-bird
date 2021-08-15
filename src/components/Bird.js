@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from "react"
 
 const Bird = () => {
     const [birdPos, setBirdPos] = useState(0)
+    const [birdY, setBirdY] = useState(-344)
 
     const handleSpriteChange = useCallback(() => {
         const newPos = birdPos + 236
@@ -17,8 +18,33 @@ const Bird = () => {
         return () => clearInterval(interval)
     }, [handleSpriteChange])
 
+    const handleBirdFall = useCallback(() => {
+        const newPos = birdY + jumpSize
+        setBirdY(newPos > 0 ? 0 : newPos)
+    }, [birdY])
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            handleBirdFall()
+        }, 500)
+        return () => clearInterval(interval)
+    }, [handleBirdFall])
+
+    const jumpSize = 15
+
+    const handleBirdJump = useCallback(e => {
+        const newPos = birdY - jumpSize
+        if (e.key === " ") setBirdY(newPos < -688 ? -688 : newPos)
+    }, [birdY])
+
+    useEffect(() => {
+        window.addEventListener("keypress", handleBirdJump)
+
+        return () => window.removeEventListener("keypress", handleBirdJump)
+    }, [handleBirdJump])
+
     return (
-        <div className="bird">
+        <div className="bird" style={{transform: `translateY(${birdY}px)`}}>
             <img 
             src={require("../bird spritesheet.png").default} 
             alt="flappy bird"
