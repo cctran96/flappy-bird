@@ -18,6 +18,8 @@ const Bird = () => {
         return () => clearInterval(interval)
     }, [handleSpriteChange])
 
+    const jumpSize = 15
+
     const handleBirdFall = useCallback(() => {
         const newPos = birdY + jumpSize
         setBirdY(newPos > 0 ? 0 : newPos)
@@ -29,8 +31,6 @@ const Bird = () => {
         }, 500)
         return () => clearInterval(interval)
     }, [handleBirdFall])
-
-    const jumpSize = 15
 
     const handleBirdJump = useCallback(e => {
         const newPos = birdY - jumpSize
